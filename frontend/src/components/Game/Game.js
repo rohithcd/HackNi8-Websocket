@@ -10,9 +10,12 @@ const Game = () => {
         [21, 22, 23, 24, 25]
     ]);
 
-    useEffect(() => {
+    const [state, setState] = useState(true)
+
+
+    useState(() => {
         generateRandom()
-    }, []);
+    }, [state])
 
     // function generateGrid() {
         var gridVal = [];
@@ -55,12 +58,16 @@ const Game = () => {
         setGrid(grid);
     }
 
+    useEffect(() => {
+        generateRandom()
+    }, []);
+
     return (
         <>
         <section id="grid">
             <GenerateGrid grid={grid}/>
-
-            <button onClick={generateRandom}>Start</button>
+            <h1>{state}</h1>
+            <button onClick={() => setState(!state)}>Start</button>
         </section>
         </>
     );
@@ -75,7 +82,7 @@ const GenerateGrid = ({grid}) => {
             {
                 grid.map((row, rowIndex) => (
                     row.map((col, colIndex) => (
-                        <div className="grid" id={((rowIndex+1)*10 + colIndex) + 1}>{col}</div>
+                        <div className="grid" id={((rowIndex+1)*10 + colIndex) + 1}><span>{col}</span></div>
                     ))
                 ))
             }
