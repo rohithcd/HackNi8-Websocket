@@ -1,5 +1,5 @@
 import "./Game.css";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 
 const Game = () => {
     const [grid, setGrid] = useState([
@@ -10,8 +10,12 @@ const Game = () => {
         [21, 22, 23, 24, 25]
     ]);
 
-    const [state, setState] = useState(true)
+    const [state, setState] = useState(0)
 
+
+    function handleState() {
+        setState((state) => state += 1)
+    }
 
     useState(() => {
         generateRandom()
@@ -66,9 +70,11 @@ const Game = () => {
         <>
         <section id="grid">
             <GenerateGrid grid={grid}/>
-            <h1>{state}</h1>
-            <button onClick={() => setState(!state)}>Start</button>
+
         </section>
+
+        <h1>{state}</h1>
+            <button onClick={handleState}>Start</button>
         </>
     );
 }
@@ -76,13 +82,18 @@ const Game = () => {
 export default Game;
 
 const GenerateGrid = ({grid}) => {
+    let div = useRef(null)
+
+    function handleClick(val)  {
+        document.getElementById(val).classList.add("crossed");
+    }
 
     return(
         <>
             {
                 grid.map((row, rowIndex) => (
                     row.map((col, colIndex) => (
-                        <div className="grid" id={((rowIndex+1)*10 + colIndex) + 1}><span>{col}</span></div>
+                        <div className="box" id={((rowIndex+1)*10 + colIndex) + 1} onClick={() => handleClick(((rowIndex+1)*10 + colIndex) + 1)}><span>{col}</span></div>
                     ))
                 ))
             }

@@ -4,8 +4,19 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    border: 1px solid #2f3d2e;
 }
 
 .box {
     font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2f3d2e;
+    cursor: pointer;
+}
+
+.crossed {
+    background-color: #333333;
+    color: #fff;
 }
