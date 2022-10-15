@@ -16,14 +16,16 @@ const Game = () => {
 
     // function generateGrid() {
         var gridVal = [];
-        
+
 
         for (let i = 0; i < grid.length; i++) {
             for(let j = 0; j < grid[i].length; j++) {
                 console.log(gridVal, grid[0][0]);
                 gridVal.push(<div className="grid" id={((i+1)*10 + j) + 1}>{grid[i][j]}</div>)
+
             }
         }
+
 
         console.log(gridVal)
 
@@ -56,7 +58,7 @@ const Game = () => {
     return (
         <>
         <section id="grid">
-            {gridVal}
+            <GenerateGrid grid={grid}/>
 
             <button onClick={generateRandom}>Start</button>
         </section>
@@ -65,3 +67,18 @@ const Game = () => {
 }
 
 export default Game;
+
+const GenerateGrid = ({grid}) => {
+
+    return(
+        <>
+            {
+                grid.map((row, rowIndex) => (
+                    row.map((col, colIndex) => (
+                        <div className="grid" id={((rowIndex+1)*10 + colIndex) + 1}>{col}</div>
+                    ))
+                ))
+            }
+        </>
+    )
+}
